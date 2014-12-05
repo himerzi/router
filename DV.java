@@ -43,15 +43,16 @@ public class DV implements RoutingAlgorithm {
     static int INFINITY = 60;
 
     private HashMap<Integer, DVRoutingTableEntry> routingTable = new HashMap<Integer, DVRoutingTableEntry>();
+    private Router router;
 
     public DV()
     {
     }
 //    TODO implement this shit
 //    TODO check for cisco problem
-//    TODO packets sent to itself?
     public void setRouterObject(Router obj)
     {
+        router = obj;
     }
     
     public void setUpdateInterval(int u)
@@ -68,13 +69,17 @@ public class DV implements RoutingAlgorithm {
     
     public void initalise()
     {
-//        routingTable = new HashMap();
 //        Startup: initialize table to contain one entry for the local interface -1. metric should be 0.
+//        TODO check ttl
+        int selfid = router.getId();
+        DVRoutingTableEntry self = new DVRoutingTableEntry(selfid, -1, 0, 0);
+        routingTable.put(selfid, self);
     }
 
     public int getNextHop(int destination)
     {
-        return 0;
+        //-2 means destination unknown
+        return routingTable.getOrDefault(destination, -2);
     }
     
     public void tidyTable()
@@ -83,73 +88,88 @@ public class DV implements RoutingAlgorithm {
     
     public Packet generateRoutingPacket(int iface)
     {
-        return null;
+        Payload pd = generateRoutingPayload();
+        Packet p = new RoutingPacket(router.getId(),Packet.BROADCAST);
+        p.setPayload(pd);
+        return p;
     }
-    
+
+
     public void processRoutingPacket(Packet p, int iface)
     {
-        //getInterfaceWeight
-//        deserialise the packet.
-//        packet getPayload
-//        payload getData
-//        data is a vector of tablentries
-//        we want to know the metric advertised on the packet
-//        need to get the metrick for the iface.
-//
-//        m += metric for interface i
-//            r = lookup(D) in routing table if (r = “not found”) then
-//            newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
-//        else if (i == r.i) then r.m = m
-//        else if (m < r.m) then r.m = m; r.i = i
+        Vector foreignTable = getPacketTableEntries(p);
+        int metric =  router.getInterfaceWeight(iface);
+        DVTableMerge(foreignTable, iface, metric);
     }
     
     public void showRoutes()
     {
     }
 
-
+    /**
+     * serializes routing table to a payload object
+     * @return
+     */
+    private Payload generateRoutingPayload()
+    {
+        Payload p = new Payload();
+        for(RoutingTableEntry entry : routingTable.values()){
+            p.addEntry(entry);
+        }
+        return p;
+    }
     private Vector<DVRoutingTableEntry> getPacketTableEntries(Packet p)
     {
 //        Ideally, payload should be implemented as Vector<RoutingTableEntry>, but it is currently implemented as
-//        Vector<Object?, which means we have to do this.
-        Vector<? super DVRoutingTableEntry> packetData =  p.getPayload().getData();
-        Vector<DVRoutingTableEntry> entries = (Vector)packetData;
+//        Vector<Object>, which means we have to do this.
+        Vector<DVRoutingTableEntry> entries = (Vector)p.getPayload().getData();;
         return entries;
     }
 
-    private void DVTableMerge(HashMap<Integer, DVRoutingTableEntry> externalTable, int iface, int metric)
+    /**
+     *
+     * @param externalTable a routing table sent from a different router
+     * @param iface is the interface the routing packet came in on
+     * @param metric is the metric for iface
+     */
+    private void DVTableMerge(Vector<DVRoutingTableEntry> externalTable, int iface, int metric)
     {
-            for (Map.Entry<Integer, DVRoutingTableEntry> extEntry : externalTable.entrySet()) {
-                compareAndModifyEntries((Integer)extEntry.getKey(), (DVRoutingTableEntry)extEntry.getValue(), iface, metric);
+            for (DVRoutingTableEntry extEntry : externalTable) {
+                compareAndModifyTableEntries(extEntry, iface, metric);
             }
     }
 
-    public void compareAndModifyEntries(Integer key, DVRoutingTableEntry externalEntry, int iface, int metric)
+    /**
+     *
+     * @param externalEntry a routing table entry which was received on a routing packet
+     * @param iface is the interface the routing packet came in on
+     * @param metric is the metric for iface
+     */
+    public void compareAndModifyTableEntries(DVRoutingTableEntry externalEntry, int iface, int metric)
     {
-        //r = lookup(D) in routing table
+        int key = externalEntry.getDestination();
+//      r = lookup(D) in routing table
         DVRoutingTableEntry myEntry = routingTable.get(key);
 
         int newMetric = externalEntry.getMetric() + metric;
-        //if (r = “not found”) then
+//      if (r = “not found”) then
         if(myEntry == null){
-            //            newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
-//            TODO IMpelment TTL
-            myEntry = new DVRoutingTableEntry(externalEntry.getDestination(), iface, newMetric,
-                    0);
+//          newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
+//           TODO IMpelment TTL
+            myEntry = new DVRoutingTableEntry(externalEntry.getDestination(), iface, newMetric,0);
         }
-        //        else if (i == r.i) then r.m = m
+//      else if (i == r.i) then r.m = m
         else if(iface == myEntry.getInterface()){
+//           the metric should be updated
             myEntry.setMetric(newMetric);
         }
-        //        else if (m < r.m) then r.m = m; r.i = i
+//      else if (m < r.m) then r.m = m; r.i = i
         else if(myEntry.getMetric() > newMetric){
             myEntry.setMetric(newMetric);
             myEntry.setInterface(iface);
         }
         routingTable.put(key, myEntry);
     }
-
-
 }
 
 //class DVRoutingTable<Integer, DVRoutingTableEntry> extends HashMap<Integer, DVRoutingTableEntry>
@@ -180,7 +200,7 @@ public class DV implements RoutingAlgorithm {
 //        //if (r = “not found”) then
 //        if(myEntry == null){
 //            //            newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
-////            TODO IMpelment TTL
+
 //            myEntry = new DVRoutingTableEntry(externalEntry.getDestination(), iface, newMetric,
 //                    0);
 //        }
