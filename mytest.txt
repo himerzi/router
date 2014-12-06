@@ -1,0 +1,701 @@
+Loading configuration : mytest.cfg
+Reading file mytest.cfg
+Created Router 0 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 1 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 2 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 3 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Created Router 4 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: off expire entries off
+Adding link Link (R0:0 I0:0 W0:1)<-->(R1:1 I1:0 W1:1)
+Adding link Link (R0:0 I0:0 W0:1)<-->(R1:1 I1:0 W1:1)
+Adding link Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Adding link Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Adding link Link (R0:2 I0:1 W0:1)<-->(R1:3 I1:0 W1:1)
+Adding link Link (R0:2 I0:1 W0:1)<-->(R1:3 I1:0 W1:1)
+Adding link Link (R0:3 I0:1 W0:1)<-->(R1:4 I1:1 W1:1)
+Adding link Link (R0:3 I0:1 W0:1)<-->(R1:4 I1:1 W1:1)
+Adding link Link (R0:0 I0:1 W0:3)<-->(R1:4 I1:0 W1:3)
+Adding link Link (R0:0 I0:1 W0:3)<-->(R1:4 I1:0 W1:3)
+Adding Event is send to occur at 10 with 0 3
+Adding Event is send to occur at 30 with 0 3
+Adding Event is downlink to occur at 15 with 1 1 2 0
+Adding Event is uplink to occur at 31 with 1 1 2 0
+Adding Event is dumprt to occur at 1 with all
+Adding Event is dumprt to occur at 7 with all
+Adding Event is dumprt to occur at 8 with all
+Adding Event is dumprt to occur at 9 with all
+Adding Event is dumprt to occur at 10 with all
+Adding Event is dumprt to occur at 11 with all
+Adding Event is dumprt to occur at 12 with all
+Adding Event is dumprt to occur at 13 with all
+Adding Event is dumprt to occur at 14 with all
+Adding Event is dumprt to occur at 16 with all
+Adding Event is dumprt to occur at 17 with all
+Adding Event is dumprt to occur at 18 with all
+Adding Event is dumprt to occur at 21 with all
+Adding Event is dumprt to occur at 22 with all
+Adding Event is dumprt to occur at 23 with all
+Adding Event is dumprt to occur at 24 with all
+Adding Event is dumprt to occur at 32 with all
+Adding Event is dumprt to occur at 33 with all
+Adding Event is dumprt to occur at 34 with all
+Adding Event is dumprt to occur at 35 with all
+Time :1
+Router 0
+d 0 i -1 m 0
+Router 1
+d 1 i -1 m 0
+Router 2
+d 2 i -1 m 0
+Router 3
+d 3 i -1 m 0
+Router 4
+d 4 i -1 m 0
+Time :2
+Time :3
+Time :4
+Time :5
+Time :6
+Time :7
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :8
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :9
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :10
+Forwarded packet src 0 dst 3 type 1 ttl 254 seq 1 path
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :11
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Forwarded packet src 0 dst 3 type 1 ttl 253 seq 1 path (0.0->1.0)
+Time :12
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Forwarded packet src 0 dst 3 type 1 ttl 252 seq 1 path (0.0->1.0) (1.1->2.0)
+Time :13
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Received packet src 0 dst 3 type 1 ttl 252 seq 1 path (0.0->1.0) (1.1->2.0) (2.1->3.0)
+Time :14
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :15
+Setting link status to down Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+size of out0 1
+size of out1 1
+Time :16
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 2
+size of out1 2
+Time :17
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 3
+size of out1 3
+Time :18
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 60
+d 3 i 1 m 60
+d 4 i 1 m 60
+Router 2
+d 0 i 0 m 60
+d 1 i 0 m 60
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 4
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 5
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 4
+size of out1 4
+Time :19
+size of out0 5
+size of out1 5
+Time :20
+size of out0 6
+size of out1 6
+Time :21
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 0 m 6
+d 3 i 0 m 5
+d 4 i 0 m 4
+Router 2
+d 0 i 1 m 5
+d 1 i 1 m 6
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 5
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 7
+size of out1 7
+Time :22
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 0 m 6
+d 3 i 0 m 5
+d 4 i 0 m 4
+Router 2
+d 0 i 1 m 5
+d 1 i 1 m 6
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 5
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 8
+size of out1 8
+Time :23
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 0 m 6
+d 3 i 0 m 5
+d 4 i 0 m 4
+Router 2
+d 0 i 1 m 5
+d 1 i 1 m 6
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 5
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 9
+size of out1 9
+Time :24
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 0 m 6
+d 3 i 0 m 5
+d 4 i 0 m 4
+Router 2
+d 0 i 1 m 5
+d 1 i 1 m 6
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 5
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+size of out0 10
+size of out1 10
+Time :25
+size of out0 11
+size of out1 11
+Time :26
+size of out0 12
+size of out1 12
+Time :27
+size of out0 13
+size of out1 13
+Time :28
+size of out0 14
+size of out1 14
+Time :29
+size of out0 15
+size of out1 15
+Time :30
+Forwarded packet src 0 dst 3 type 1 ttl 254 seq 2 path
+size of out0 16
+size of out1 16
+Time :31
+Setting link status to up Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
+Forwarded packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0)
+Time :32
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 0 m 6
+d 3 i 0 m 5
+d 4 i 0 m 4
+Router 2
+d 0 i 1 m 5
+d 1 i 1 m 6
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 1 m 4
+d 1 i 1 m 5
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Received packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0) (4.1->3.1)
+Time :33
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 1 m 5
+d 3 i 1 m 4
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :34
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :35
+Router 0
+d 0 i -1 m 0
+d 1 i 0 m 1
+d 2 i 0 m 2
+d 3 i 0 m 3
+d 4 i 1 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 2
+d 4 i 1 m 3
+Router 2
+d 0 i 0 m 2
+d 1 i 0 m 1
+d 2 i -1 m 0
+d 3 i 1 m 1
+d 4 i 1 m 2
+Router 3
+d 0 i 0 m 3
+d 1 i 0 m 2
+d 2 i 0 m 1
+d 3 i -1 m 0
+d 4 i 1 m 1
+Router 4
+d 0 i 0 m 3
+d 1 i 1 m 3
+d 2 i 1 m 2
+d 3 i 1 m 1
+d 4 i -1 m 0
+Time :36
+Time :37
+Time :38
+Time :39
