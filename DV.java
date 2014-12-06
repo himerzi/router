@@ -1,8 +1,5 @@
 import java.lang.Math;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 class DVRoutingTableEntry implements RoutingTableEntry
 {
@@ -47,8 +44,11 @@ public class DV implements RoutingAlgorithm {
     private Router router;
     private int updateInterval;
     //counts timeout on interfaces, so we know when links are down
-    private boolean[] ifTimeOut;
+    private boolean[] heardFrom;
     private int timeCount = 0;
+    //keeps us in sync with update interval
+    private int instant;
+
     public DV()
     {
     }
@@ -84,54 +84,81 @@ public class DV implements RoutingAlgorithm {
         DVRoutingTableEntry self = new DVRoutingTableEntry(selfid, -1, 0, 0);
         routingTable.put(selfid, self);
         // int arrays are automatically initialised to 0 in java.
-        ifTimeOut = new boolean[router.getNumInterfaces()];
+        heardFrom = new boolean[router.getNumInterfaces()];
+        instant = router.getCurrentTime();
 
     }
 
     public int getNextHop(int destination)
     {
-        return routingTable.containsKey(destination) ? routingTable.get(destination).getInterface() : UNKNOWN;
+        if(routingTable.containsKey(destination)){
+            DVRoutingTableEntry entry = routingTable.get(destination);
+            if(entry.getMetric() < INFINITY){
+                return entry.getInterface();
+            }
+
+        }
+        return UNKNOWN;
     }
     
     public void tidyTable()
     {
-        // TODO delare 6 as a constant.
-        if(timeCount >= 1){
-            for(int i = 0; i < ifTimeOut.length ; i++){
-                //if 6 timesteps have passed, and we havent received any routing packets on this interface
-                //then we shall assume it is down
-                if(ifTimeOut[i] == false){
-                    setInfInterface(i);
-                }
-                //otherwise, reset its value.
-                else {
-                    ifTimeOut[i] = false;
-                }
+
+        for(int i = 0; i < router.getNumInterfaces(); i++){
+            if(router.getInterfaceState(i) == false){
+              //  System.out.format("interface %s is down, router %s %n", i, router.getId());
+                setInfInterface(i);
             }
-            timeCount = 0;
         }
+//        // TODO delare 6 as a constant.
+//        if(timeCount > updateInterval){
+//            for(int i = 0; i < heardFrom.length ; i++){
+//                //if 6 timesteps have passed, and we havent received any routing packets on this interface
+//                //then we shall assume it is down
+//                if(heardFrom[i]){
+//                    heardFrom[i] = false;
+//                }
+//                //otherwise, reset its value.
+//                else {
+//                    setInfInterface(i);
+//                }
+//            }
+//            timeCount = 0;
+//        }
 
     }
     
     public Packet generateRoutingPacket(int iface)
     {
-        Payload pd = generateRoutingPayload();
-        Packet p = new RoutingPacket(router.getId(),Packet.BROADCAST);
-        p.setPayload(pd);
-        return p;
+        //System.out.println("instant is " + instant);
+
+        if(router.getInterfaceState(iface)){
+          //  System.out.println( " time is " + router.getCurrentTime() + " instant is " + instant + " router " + router.getId());
+            Payload pd = generateRoutingPayload();
+            Packet p = new Packet(router.getId(),Packet.BROADCAST);
+            p.setPayload(pd);
+            p.setType(Packet.ROUTING);
+            //instant = router.getCurrentTime();
+            return p;
+        }
+        else{
+            //System.out.println("called out of instant " + instant + " time " +router.getCurrentTime() + " router " + router.getId());
+            return null;
+        }
+
+
+
     }
 
 
     public void processRoutingPacket(Packet p, int iface)
     {
-        //add a 1, to indicate we've heard from this interface
-        // TODO make this a boolean flag instead.
-        ifTimeOut[iface] = true;
-        //increase the timer. We'll check for timed out interfaces every 6 timesteps
-        timeCount++;
+
         Vector foreignTable = getPacketTableEntries(p);
         int metric =  router.getInterfaceWeight(iface);
         DVTableMerge(foreignTable, iface, metric);
+       // ifaceAlive(iface);
+
     }
     
     public void showRoutes()
@@ -141,6 +168,17 @@ public class DV implements RoutingAlgorithm {
             System.out.format("d %d i %d m %d%n",entry.getDestination(), entry.getInterface(), entry.getMetric());
         }
 
+    }
+
+    /**
+     * used to keep interfaces from timing out,  and having their metric set to infinity
+     * @param iface
+     */
+    private void ifaceAlive(int iface){
+        //indicate we've heard from this interface
+        heardFrom[iface] = true;
+        //increase the timer. We'll check for timed out interfaces every 6 timesteps
+        timeCount++;
     }
 
     /**
@@ -204,13 +242,14 @@ public class DV implements RoutingAlgorithm {
 //      r = lookup(D) in routing table
         DVRoutingTableEntry myEntry = routingTable.get(key);
 
-        int newMetric = (externalEntry.getMetric() + metric) > INFINITY ? INFINITY : externalEntry.getMetric() + metric;
+        int newMetric = (externalEntry.getMetric() + metric);
+        newMetric = newMetric >= INFINITY ? INFINITY : newMetric;
 
 //      if (r = “not found”) then
         if(myEntry == null){
 //          newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
 //           TODO IMpelment TTL
-            myEntry = new DVRoutingTableEntry(externalEntry.getDestination(), iface, newMetric,1);
+            myEntry = new DVRoutingTableEntry(key, iface, newMetric,1);
         }
 //      else if (i == r.i) then r.m = m
         else if(iface == myEntry.getInterface()){

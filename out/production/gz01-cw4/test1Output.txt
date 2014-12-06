@@ -498,37 +498,21 @@ d 3 i 1 m 1
 d 4 i -1 m 0
 Time :15
 Setting link status to down Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
-size of out0 1
-size of out1 1
 Time :16
-size of out0 2
-size of out1 2
 Time :17
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 3
-size of out1 3
 Time :18
-size of out0 4
-size of out1 4
 Time :19
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 5
-size of out1 5
 Time :20
-size of out0 6
-size of out1 6
 Time :21
 event Event is dumpPacketStats to occur at 21 with all
 Pkt stats for 0 :  s 41 r 38 d 0 f 0
 (R0:0 I0:0) s 21 r 19<-->(R1:1 I1:0) s 20 r 20
 (R0:0 I0:1) s 20 r 19<-->(R1:4 I1:0) s 20 r 19
-Pkt stats for 1 :  s 40 r 33 d 0 f 1
+Pkt stats for 1 :  s 34 r 33 d 0 f 1
 (R0:0 I0:0) s 21 r 19<-->(R1:1 I1:0) s 20 r 20
-(R0:1 I0:1) s 21 r 14<-->(R1:2 I1:0) s 20 r 15
-Pkt stats for 2 :  s 40 r 33 d 0 f 1
-(R0:1 I0:1) s 21 r 14<-->(R1:2 I1:0) s 20 r 15
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
+Pkt stats for 2 :  s 34 r 33 d 0 f 1
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
 (R0:2 I0:1) s 21 r 19<-->(R1:3 I1:0) s 20 r 20
 Pkt stats for 3 :  s 40 r 39 d 0 f 0
 (R0:2 I0:1) s 21 r 19<-->(R1:3 I1:0) s 20 r 20
@@ -566,20 +550,16 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 7
-size of out1 7
 Time :22
 event Event is dumpPacketStats to occur at 22 with all
 Pkt stats for 0 :  s 43 r 40 d 0 f 0
 (R0:0 I0:0) s 22 r 20<-->(R1:1 I1:0) s 21 r 21
 (R0:0 I0:1) s 21 r 20<-->(R1:4 I1:0) s 21 r 20
-Pkt stats for 1 :  s 42 r 34 d 0 f 1
+Pkt stats for 1 :  s 35 r 34 d 0 f 1
 (R0:0 I0:0) s 22 r 20<-->(R1:1 I1:0) s 21 r 21
-(R0:1 I0:1) s 22 r 14<-->(R1:2 I1:0) s 21 r 15
-Pkt stats for 2 :  s 42 r 34 d 0 f 1
-(R0:1 I0:1) s 22 r 14<-->(R1:2 I1:0) s 21 r 15
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
+Pkt stats for 2 :  s 35 r 34 d 0 f 1
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
 (R0:2 I0:1) s 22 r 20<-->(R1:3 I1:0) s 21 r 21
 Pkt stats for 3 :  s 42 r 41 d 0 f 0
 (R0:2 I0:1) s 22 r 20<-->(R1:3 I1:0) s 21 r 21
@@ -617,18 +597,16 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-size of out0 8
-size of out1 8
 Time :23
 event Event is dumpPacketStats to occur at 23 with all
 Pkt stats for 0 :  s 45 r 42 d 0 f 0
 (R0:0 I0:0) s 23 r 21<-->(R1:1 I1:0) s 22 r 22
 (R0:0 I0:1) s 22 r 21<-->(R1:4 I1:0) s 22 r 21
-Pkt stats for 1 :  s 44 r 35 d 0 f 1
+Pkt stats for 1 :  s 36 r 35 d 0 f 1
 (R0:0 I0:0) s 23 r 21<-->(R1:1 I1:0) s 22 r 22
-(R0:1 I0:1) s 23 r 14<-->(R1:2 I1:0) s 22 r 15
-Pkt stats for 2 :  s 44 r 35 d 0 f 1
-(R0:1 I0:1) s 23 r 14<-->(R1:2 I1:0) s 22 r 15
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
+Pkt stats for 2 :  s 36 r 35 d 0 f 1
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
 (R0:2 I0:1) s 23 r 21<-->(R1:3 I1:0) s 22 r 22
 Pkt stats for 3 :  s 44 r 43 d 0 f 0
 (R0:2 I0:1) s 23 r 21<-->(R1:3 I1:0) s 22 r 22
@@ -666,20 +644,16 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 9
-size of out1 9
 Time :24
 event Event is dumpPacketStats to occur at 24 with all
 Pkt stats for 0 :  s 47 r 44 d 0 f 0
 (R0:0 I0:0) s 24 r 22<-->(R1:1 I1:0) s 23 r 23
 (R0:0 I0:1) s 23 r 22<-->(R1:4 I1:0) s 23 r 22
-Pkt stats for 1 :  s 46 r 36 d 0 f 1
+Pkt stats for 1 :  s 37 r 36 d 0 f 1
 (R0:0 I0:0) s 24 r 22<-->(R1:1 I1:0) s 23 r 23
-(R0:1 I0:1) s 24 r 14<-->(R1:2 I1:0) s 23 r 15
-Pkt stats for 2 :  s 46 r 36 d 0 f 1
-(R0:1 I0:1) s 24 r 14<-->(R1:2 I1:0) s 23 r 15
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
+Pkt stats for 2 :  s 37 r 36 d 0 f 1
+(R0:1 I0:1) s 15 r 14<-->(R1:2 I1:0) s 14 r 15
 (R0:2 I0:1) s 24 r 22<-->(R1:3 I1:0) s 23 r 23
 Pkt stats for 3 :  s 46 r 45 d 0 f 0
 (R0:2 I0:1) s 24 r 22<-->(R1:3 I1:0) s 23 r 23
@@ -717,69 +691,21 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-size of out0 10
-size of out1 10
 Time :25
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 11
-size of out1 11
 Time :26
-size of out0 12
-size of out1 12
 Time :27
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 13
-size of out1 13
 Time :28
-size of out0 14
-size of out1 14
 Time :29
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 15
-size of out1 15
 Time :30
 Forwarded packet src 0 dst 3 type 1 ttl 254 seq 2 path
-size of out0 16
-size of out1 16
 Time :31
-seting iface inf  1 router 1
-seting iface inf  0 router 2
 Forwarded packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0)
-size of out0 17
-size of out1 17
 Time :32
 Received packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0) (4.1->3.1)
-size of out0 18
-size of out1 18
 Time :33
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 19
-size of out1 19
 Time :34
-size of out0 20
-size of out1 20
 Time :35
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 21
-size of out1 21
 Time :36
-size of out0 22
-size of out1 22
 Time :37
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 23
-size of out1 23
 Time :38
-size of out0 24
-size of out1 24
 Time :39
-seting iface inf  1 router 1
-seting iface inf  0 router 2
-size of out0 25
-size of out1 25
