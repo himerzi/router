@@ -93,10 +93,7 @@ Adding Event is send to occur at 30 with 4 20
 Adding Event is dumprt to occur at 34 with 1
 Adding Event is dumprt to occur at 34 with 3
 Adding Event is dumprt to occur at 35 with 1
-Adding Event is dumprt to occur at 36 with 1
-Adding Event is dumprt to occur at 37 with 1
-Adding Event is dumprt to occur at 38 with 1
-Adding Event is dumprt to occur at 39 with 1
+Adding Event is dumprt to occur at 35 with 3
 Adding Event is uplink to occur at 40 with 2 1 3 2
 Adding Event is send to occur at 50 with 0 11
 Adding Event is send to occur at 50 with 1 17
@@ -960,128 +957,47 @@ d 22 i 0 m 39
 d 23 i 0 m 39
 d 24 i 0 m 39
 d 25 i 0 m 39
+Router 3
+d 0 i 1 m 50
+d 1 i 0 m 1
+d 2 i 1 m 49
+d 3 i -1 m 0
+d 4 i 1 m 10
+d 5 i 1 m 11
+d 6 i 1 m 11
+d 7 i 1 m 11
+d 8 i 1 m 12
+d 9 i 1 m 12
+d 10 i 1 m 12
+d 11 i 1 m 12
+d 12 i 1 m 12
+d 13 i 1 m 21
+d 14 i 1 m 22
+d 15 i 1 m 31
+d 16 i 1 m 32
+d 17 i 1 m 32
+d 18 i 1 m 40
+d 19 i 1 m 41
+d 20 i 1 m 39
+d 21 i 1 m 40
+d 22 i 1 m 40
+d 23 i 1 m 40
+d 24 i 1 m 40
+d 25 i 1 m 40
 Forwarded packet src 4 dst 20 type 1 ttl 249 seq 6 path (4.2->7.0) (7.1->8.0) (8.0->7.1) (7.1->8.0) (8.0->7.1)
 Forwarded packet src 1 dst 17 type 1 ttl 249 seq 5 path (1.0->3.0) (3.1->4.4) (4.2->7.0) (7.6->13.0) (13.2->15.0)
 Forwarded packet src 0 dst 11 type 1 ttl 249 seq 4 path (0.0->2.0) (2.2->20.0) (20.3->21.0) (21.0->20.3) (20.3->21.0)
 Time :36
-Router 1
-d 0 i 0 m 51
-d 1 i -1 m 0
-d 2 i 0 m 50
-d 3 i 0 m 1
-d 4 i 0 m 11
-d 5 i 0 m 12
-d 6 i 0 m 12
-d 7 i 0 m 12
-d 8 i 0 m 13
-d 9 i 0 m 13
-d 10 i 0 m 13
-d 11 i 0 m 13
-d 12 i 0 m 13
-d 13 i 0 m 22
-d 14 i 0 m 23
-d 15 i 0 m 32
-d 16 i 0 m 33
-d 17 i 0 m 33
-d 18 i 0 m 41
-d 19 i 0 m 42
-d 20 i 0 m 40
-d 21 i 0 m 41
-d 22 i 0 m 41
-d 23 i 0 m 41
-d 24 i 0 m 41
-d 25 i 0 m 41
 Forwarded packet src 4 dst 20 type 1 ttl 248 seq 6 path (4.2->7.0) (7.1->8.0) (8.0->7.1) (7.1->8.0) (8.0->7.1) (7.6->13.0)
 Received packet src 1 dst 17 type 1 ttl 249 seq 5 path (1.0->3.0) (3.1->4.4) (4.2->7.0) (7.6->13.0) (13.2->15.0) (15.2->17.0)
 Forwarded packet src 0 dst 11 type 1 ttl 248 seq 4 path (0.0->2.0) (2.2->20.0) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3)
 Time :37
-Router 1
-d 0 i 0 m 53
-d 1 i -1 m 0
-d 2 i 0 m 52
-d 3 i 0 m 1
-d 4 i 0 m 11
-d 5 i 0 m 12
-d 6 i 0 m 12
-d 7 i 0 m 12
-d 8 i 0 m 13
-d 9 i 0 m 13
-d 10 i 0 m 13
-d 11 i 0 m 13
-d 12 i 0 m 13
-d 13 i 0 m 22
-d 14 i 0 m 23
-d 15 i 0 m 32
-d 16 i 0 m 33
-d 17 i 0 m 33
-d 18 i 0 m 42
-d 19 i 0 m 43
-d 20 i 0 m 42
-d 21 i 0 m 43
-d 22 i 0 m 43
-d 23 i 0 m 43
-d 24 i 0 m 43
-d 25 i 0 m 43
 Forwarded packet src 4 dst 20 type 1 ttl 247 seq 6 path (4.2->7.0) (7.1->8.0) (8.0->7.1) (7.1->8.0) (8.0->7.1) (7.6->13.0) (13.2->15.0)
 Forwarded packet src 0 dst 11 type 1 ttl 247 seq 4 path (0.0->2.0) (2.2->20.0) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3) (20.3->21.0)
 Time :38
-Router 1
-d 0 i 0 m 54
-d 1 i -1 m 0
-d 2 i 0 m 53
-d 3 i 0 m 1
-d 4 i 0 m 11
-d 5 i 0 m 12
-d 6 i 0 m 12
-d 7 i 0 m 12
-d 8 i 0 m 13
-d 9 i 0 m 13
-d 10 i 0 m 13
-d 11 i 0 m 13
-d 12 i 0 m 13
-d 13 i 0 m 22
-d 14 i 0 m 23
-d 15 i 0 m 32
-d 16 i 0 m 33
-d 17 i 0 m 33
-d 18 i 0 m 42
-d 19 i 0 m 43
-d 20 i 0 m 43
-d 21 i 0 m 44
-d 22 i 0 m 44
-d 23 i 0 m 44
-d 24 i 0 m 44
-d 25 i 0 m 44
 Forwarded packet src 4 dst 20 type 1 ttl 246 seq 6 path (4.2->7.0) (7.1->8.0) (8.0->7.1) (7.1->8.0) (8.0->7.1) (7.6->13.0) (13.2->15.0) (15.3->18.2)
 Forwarded packet src 0 dst 11 type 1 ttl 246 seq 4 path (0.0->2.0) (2.2->20.0) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3)
 Time :39
-Router 1
-d 0 i 0 m 54
-d 1 i -1 m 0
-d 2 i 0 m 53
-d 3 i 0 m 1
-d 4 i 0 m 11
-d 5 i 0 m 12
-d 6 i 0 m 12
-d 7 i 0 m 12
-d 8 i 0 m 13
-d 9 i 0 m 13
-d 10 i 0 m 13
-d 11 i 0 m 13
-d 12 i 0 m 13
-d 13 i 0 m 22
-d 14 i 0 m 23
-d 15 i 0 m 32
-d 16 i 0 m 33
-d 17 i 0 m 33
-d 18 i 0 m 42
-d 19 i 0 m 43
-d 20 i 0 m 43
-d 21 i 0 m 44
-d 22 i 0 m 44
-d 23 i 0 m 44
-d 24 i 0 m 44
-d 25 i 0 m 44
 Received packet src 4 dst 20 type 1 ttl 246 seq 6 path (4.2->7.0) (7.1->8.0) (8.0->7.1) (7.1->8.0) (8.0->7.1) (7.6->13.0) (13.2->15.0) (15.3->18.2) (18.0->20.2)
 Forwarded packet src 0 dst 11 type 1 ttl 245 seq 4 path (0.0->2.0) (2.2->20.0) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3) (20.3->21.0) (21.0->20.3) (20.3->21.0)
 Time :40
