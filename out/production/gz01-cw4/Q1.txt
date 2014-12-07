@@ -1,0 +1,48 @@
+In test3, when link 3.1 4.0 fails, bouncing is observed. Packetes sent from routers that reach router 4, via router 3,
+will take a path that "bounces" back-and-forth between routers, until there is convergence on a new path to reach router4.
+For example, consider the path taken when a packet is sent from 0 to 4 during an unconverged period:
+Time :13 (0.1->2.0) :14 (2.0->0.1) B (0.2->1.0) (1.1->2.1) (2.0->0.1) (0.2->1.0) (1.1->2.1) X Time :22 (2.2->5.0) (5.2->6.2) (6.0->4.1)
+
+At 13, 2 has advertised its routing table ahead of 0 advertising its table, so 0 has adopted router 2 as its first hop
+on the path to reaching router 4. Unfortunately, 2's routing table is such that it's next hop for reaching 4, is 0.
+This is bad, it will cause the packet to "bounce", as it is at :14. 0 should have never chosen 2 as its next hop toward 4.
+2 should have never advertised to 0 a path to 4, whose next hop was itself 0. This is the bouncing problem.
+
+
+Link 0.0 3.0 goes down at 35, a packet is sent from 1 to 3 at time 40. The packet reaches 3 correctly, as per the DV
+algorithm, at time 43 (see below). No pathologies are exhibited. It appears the system reached a converged state between
+the period when the link went down (35), and the packet was sent (40).
+
+Time :43
+Received packet src 1 dst 3 type 1 ttl 252 seq 3 path (1.1->2.1) (2.2->5.0) (5.1->3.3)
+
+
+Finally, link 2.2 5.0 goes down at time :45. A packet is sent from router 0 to router 5 at :40. Seemingly the routing
+table state has not yet converged, as bouncing is exhibited in the path taken (see below). This implies that there isn't
+yet convergence. Eventually the packet is dropped before convergence is reached. It never reaches router 5.
+
+ (0.2->1.0) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1)
+ (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1)
+ (2.1->1.1) (1.1->2.1) (2.1->1.1) (1.1->2.1) (2.1->1.1)
+
+
+
+Test 4
+
+A packet is sent at :10 from 7 to 2.  It takes the following route:
+(7.1->6.3) (6.2->5.2) (5.0->2.2)
+
+
+downlink 15 2.2 5.0
+
+send 20 7 2
+
+convergence, no bouncing pathology.
+
+expect counting to infinity.
+downlink 30 0.0 3.0
+
+Time :58
+Dropping packet src 7 dst 2 type 1 ttl 237 seq 3 path (7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0)
+(7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0) (7.0->4.2) (4.2->7.0) (7.0->4.2)
+(4.2->7.0)
