@@ -46,8 +46,9 @@ public class DV implements RoutingAlgorithm {
     //counts timeout on interfaces, so we know when links are down
     private boolean[] heardFrom;
     private int timeCount = 0;
-    //keeps us in sync with update interval
-    private int instant;
+    //keepstrack of when the last update was sent, for each interface. ie lastUpdateSent[0] is when the last routing table
+    // update was generated, and sent on interface 0
+    private int[] lastUpdateSent;
 
     public DV()
     {
@@ -85,7 +86,7 @@ public class DV implements RoutingAlgorithm {
         routingTable.put(selfid, self);
         // int arrays are automatically initialised to 0 in java.
         heardFrom = new boolean[router.getNumInterfaces()];
-        instant = router.getCurrentTime();
+        lastUpdateSent = new int[router.getNumInterfaces()];
 
     }
 
@@ -104,47 +105,38 @@ public class DV implements RoutingAlgorithm {
     public void tidyTable()
     {
 
-        for(int i = 0; i < router.getNumInterfaces(); i++){
-            if(router.getInterfaceState(i) == false){
-              //  System.out.format("interface %s is down, router %s %n", i, router.getId());
-                setInfInterface(i);
-            }
-        }
-//        // TODO delare 6 as a constant.
-//        if(timeCount > updateInterval){
-//            for(int i = 0; i < heardFrom.length ; i++){
-//                //if 6 timesteps have passed, and we havent received any routing packets on this interface
-//                //then we shall assume it is down
-//                if(heardFrom[i]){
-//                    heardFrom[i] = false;
-//                }
-//                //otherwise, reset its value.
-//                else {
-//                    setInfInterface(i);
-//                }
+//        for(int i = 0; i < router.getNumInterfaces(); i++){
+//            if(router.getInterfaceState(i) == false){
+//              //  System.out.format("interface %s is down, router %s %n", i, router.getId());
+//                setInfInterface(i);
 //            }
-//            timeCount = 0;
 //        }
+
 
     }
     
     public Packet generateRoutingPacket(int iface)
     {
-        //System.out.println("instant is " + instant);
+        int time = router.getCurrentTime();
+        boolean isIfaceUp = router.getInterfaceState(iface);
+        int lastUpdate = lastUpdateSent[iface];
+        //if the link is not down, and it is time for the next update, or if it is the first update.
+        if(isIfaceUp && ((lastUpdate + updateInterval <=  time) || lastUpdate == 0)){
 
-        if(router.getInterfaceState(iface)){
-          //  System.out.println( " time is " + router.getCurrentTime() + " instant is " + instant + " router " + router.getId());
             Payload pd = generateRoutingPayload();
             Packet p = new Packet(router.getId(),Packet.BROADCAST);
             p.setPayload(pd);
             p.setType(Packet.ROUTING);
-            //instant = router.getCurrentTime();
+            lastUpdateSent[iface] = time;
             return p;
         }
-        else{
-            //System.out.println("called out of instant " + instant + " time " +router.getCurrentTime() + " router " + router.getId());
-            return null;
+        else if(!isIfaceUp){
+            setInfInterface(iface);
         }
+        //else{
+            //System.out.println("called out of lastUpdateSent " + lastUpdateSent + " time " +router.getCurrentTime() + " router " + router.getId());
+            return null;
+        //}
 
 
 
@@ -156,7 +148,7 @@ public class DV implements RoutingAlgorithm {
 
         Vector foreignTable = getPacketTableEntries(p);
         int metric =  router.getInterfaceWeight(iface);
-        DVTableMerge(foreignTable, iface, metric);
+        DVTableMerge(foreignTable, iface);
        // ifaceAlive(iface);
 
     }
@@ -222,10 +214,10 @@ public class DV implements RoutingAlgorithm {
      * @param iface is the interface the routing packet came in on
      * @param metric is the metric for iface
      */
-    private void DVTableMerge(Vector<DVRoutingTableEntry> externalTable, int iface, int metric)
+    private void DVTableMerge(Vector<DVRoutingTableEntry> externalTable, int iface)
     {
             for (DVRoutingTableEntry extEntry : externalTable) {
-                compareAndModifyTableEntries(extEntry, iface, metric);
+                compareAndModifyTableEntries(extEntry, iface);
             }
     }
 
@@ -236,13 +228,14 @@ public class DV implements RoutingAlgorithm {
      * @param metric is the metric for iface
      */
     //TODO separate the DV algo from the table mutation commands ie two methods
-    public void compareAndModifyTableEntries(DVRoutingTableEntry externalEntry, int iface, int metric)
+    public void compareAndModifyTableEntries(DVRoutingTableEntry externalEntry, int iface)
     {
+
         int key = externalEntry.getDestination();
 //      r = lookup(D) in routing table
         DVRoutingTableEntry myEntry = routingTable.get(key);
 
-        int newMetric = (externalEntry.getMetric() + metric);
+        int newMetric = (externalEntry.getMetric() + router.getInterfaceWeight(iface));
         newMetric = newMetric >= INFINITY ? INFINITY : newMetric;
 
 //      if (r = “not found”) then

@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21292990-a2f8-4f4a-986a-d6c107a1d0cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mytest.cfg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/DV.class" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/DV.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/DVRoutingTableEntry.class" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/DVRoutingTableEntry.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/Link.class" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/Link.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DV.java" afterPath="$PROJECT_DIR$/DV.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Link.java" afterPath="$PROJECT_DIR$/Link.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test1Output.txt" afterPath="$PROJECT_DIR$/test1Output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/test1Output.txt" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/test1Output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2.cfg" afterPath="$PROJECT_DIR$/test2.cfg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/test2.cfg" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/test2.cfg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2Output.txt" afterPath="$PROJECT_DIR$/test2Output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/test2Output.txt" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/test2Output.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/.idea/vcs.xml" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gz01-cw4/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/gz01-cw4/.idea/workspace.xml" />
     </list>
@@ -45,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DV.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DV.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DV.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1538461" vertical-offset="0" max-vertical-offset="4605">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34375" vertical-offset="1440" max-vertical-offset="4500">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#DVTableMerge#0;class#DV#0" expanded="false" />
@@ -62,18 +58,18 @@
       <file leaf-file-name="test2.cfg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test2.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.923077" vertical-offset="1185" max-vertical-offset="1710">
-              <caret line="67" column="12" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+            <state vertical-scroll-proportion="-2.3076923" vertical-offset="1140" max-vertical-offset="1665">
+              <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test2Output.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test2Output.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test2Output.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6041665" vertical-offset="16160" max-vertical-offset="30345">
-              <caret line="930" column="13" selection-start-line="930" selection-start-column="13" selection-end-line="930" selection-end-column="13" />
+            <state vertical-scroll-proportion="60.76923" vertical-offset="15080" max-vertical-offset="29085">
+              <caret line="900" column="8" selection-start-line="900" selection-start-column="8" selection-end-line="900" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -102,8 +98,8 @@
       <file leaf-file-name="Router.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Router.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.1538463" vertical-offset="4055" max-vertical-offset="4800">
-              <caret line="293" column="13" selection-start-line="293" selection-start-column="9" selection-end-line="293" selection-end-column="13" />
+            <state vertical-scroll-proportion="-5.6923075" vertical-offset="3827" max-vertical-offset="4800">
+              <caret line="277" column="0" selection-start-line="277" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,8 +131,8 @@
         <option value="$PROJECT_DIR$/RoutingAlgorithm.java" />
         <option value="$PROJECT_DIR$/Link.java" />
         <option value="$PROJECT_DIR$/test1Output.txt" />
-        <option value="$PROJECT_DIR$/DV.java" />
         <option value="$PROJECT_DIR$/test2.cfg" />
+        <option value="$PROJECT_DIR$/DV.java" />
       </list>
     </option>
   </component>
@@ -491,23 +487,23 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3566265" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24248926" sideWeight="0.50089765" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18313253" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24248926" sideWeight="0.49915683" order="1" side_tool="false" content_ui="tabs" x="1069" y="40" width="360" height="572" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24248926" sideWeight="0.50084317" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28554216" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Byte Code Viewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="0" y="0" width="1440" height="872" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28554216" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -539,9 +535,13 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="router.getInterfaceState(iface);" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -775,37 +775,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Router.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.1538463" vertical-offset="4055" max-vertical-offset="4800">
-          <caret line="293" column="13" selection-start-line="293" selection-start-column="9" selection-end-line="293" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DV.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1538461" vertical-offset="0" max-vertical-offset="4605">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#DVTableMerge#0;class#DV#0" expanded="false" />
-            <element signature="docComment;method#compareAndModifyTableEntries#0;class#DV#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test2.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.923077" vertical-offset="1185" max-vertical-offset="1710">
-          <caret line="67" column="12" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+        <state vertical-scroll-proportion="-5.6923075" vertical-offset="3827" max-vertical-offset="4800">
+          <caret line="277" column="0" selection-start-line="277" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test2Output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6041665" vertical-offset="16160" max-vertical-offset="30345">
-          <caret line="930" column="13" selection-start-line="930" selection-start-column="13" selection-end-line="930" selection-end-column="13" />
+        <state vertical-scroll-proportion="60.76923" vertical-offset="15080" max-vertical-offset="29085">
+          <caret line="900" column="8" selection-start-line="900" selection-start-column="8" selection-end-line="900" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test2.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3076923" vertical-offset="1140" max-vertical-offset="1665">
+          <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DV.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34375" vertical-offset="1440" max-vertical-offset="4500">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#DVTableMerge#0;class#DV#0" expanded="false" />
+            <element signature="docComment;method#compareAndModifyTableEntries#0;class#DV#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -498,23 +498,11 @@ d 3 i 1 m 1
 d 4 i -1 m 0
 Time :15
 Setting link status to down Link (R0:1 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :16
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :17
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :18
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :19
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :20
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :21
 event Event is dumpPacketStats to occur at 21 with all
 Pkt stats for 0 :  s 41 r 38 d 0 f 0
@@ -562,8 +550,6 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :22
 event Event is dumpPacketStats to occur at 22 with all
 Pkt stats for 0 :  s 43 r 40 d 0 f 0
@@ -611,8 +597,6 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :23
 event Event is dumpPacketStats to occur at 23 with all
 Pkt stats for 0 :  s 45 r 42 d 0 f 0
@@ -660,8 +644,6 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :24
 event Event is dumpPacketStats to occur at 24 with all
 Pkt stats for 0 :  s 47 r 44 d 0 f 0
@@ -709,53 +691,21 @@ d 1 i 0 m 4
 d 2 i 1 m 2
 d 3 i 1 m 1
 d 4 i -1 m 0
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :25
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :26
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :27
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :28
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :29
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :30
 Forwarded packet src 0 dst 3 type 1 ttl 254 seq 2 path
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :31
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Forwarded packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0)
 Time :32
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Received packet src 0 dst 3 type 1 ttl 253 seq 2 path (0.1->4.0) (4.1->3.1)
 Time :33
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :34
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :35
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :36
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :37
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :38
-interface 1 is down, router 1 
-interface 0 is down, router 2 
 Time :39
-interface 1 is down, router 1 
-interface 0 is down, router 2 
