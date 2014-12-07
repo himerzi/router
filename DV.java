@@ -46,6 +46,10 @@ public class DV implements RoutingAlgorithm {
     //counts timeout on interfaces, so we know when links are down
     private boolean[] heardFrom;
     private int timeCount = 0;
+    //Is split horizon enabled?
+    private boolean PR = true;
+//    Is poison reverse enabled?
+    private boolean expire = false;
     //keepstrack of when the last update was sent, for each interface. ie lastUpdateSent[0] is when the last routing table
     // update was generated, and sent on interface 0
     private int[] lastUpdateSent;
@@ -71,10 +75,12 @@ public class DV implements RoutingAlgorithm {
     
     public void setAllowPReverse(boolean flag)
     {
+        PR = flag;
     }
     
     public void setAllowExpire(boolean flag)
     {
+       expire = flag;
     }
     
     public void initalise()
@@ -92,6 +98,7 @@ public class DV implements RoutingAlgorithm {
 
     public int getNextHop(int destination)
     {
+        //TODO shorten
         if(routingTable.containsKey(destination)){
             DVRoutingTableEntry entry = routingTable.get(destination);
             if(entry.getMetric() < INFINITY){
@@ -123,7 +130,8 @@ public class DV implements RoutingAlgorithm {
         //if the link is not down, and it is time for the next update, or if it is the first update.
         if(isIfaceUp && ((lastUpdate + updateInterval <=  time) || lastUpdate == 0)){
 
-            Payload pd = generateRoutingPayload();
+            //we pass it the interface, in case SH or PR are enabled.
+            Payload pd = generateRoutingPayload(iface);
             Packet p = new Packet(router.getId(),Packet.BROADCAST);
             p.setPayload(pd);
             p.setType(Packet.ROUTING);
@@ -192,13 +200,24 @@ public class DV implements RoutingAlgorithm {
      * serializes routing table to a payload object
      * @return
      */
-    private Payload generateRoutingPayload()
+    private Payload generateRoutingPayload(int iface)
     {
         Payload p = new Payload();
         for(DVRoutingTableEntry entry : routingTable.values()){
-            p.addEntry(entry);
+            DVRoutingTableEntry copy = new DVRoutingTableEntry(entry.getDestination(), entry.getInterface(),
+            entry.getMetric(), entry.getTime());
+            if(doPoisonReverse(entry, iface)){
+                copy.setMetric(INFINITY);
+            }
+            p.addEntry(copy);
         }
         return p;
+    }
+    private boolean doPoisonReverse(DVRoutingTableEntry entry, int iface){
+        if(PR && iface == entry.getInterface()){
+            return true;
+        }
+        return false;
     }
     private Vector<DVRoutingTableEntry> getPacketTableEntries(Packet p)
     {
@@ -227,7 +246,7 @@ public class DV implements RoutingAlgorithm {
      * @param iface is the interface the routing packet came in on
      * @param metric is the metric for iface
      */
-    //TODO separate the DV algo from the table mutation commands ie two methods
+    //TODO separate the DV algo from the table mutation commands ie two methods. rename
     public void compareAndModifyTableEntries(DVRoutingTableEntry externalEntry, int iface)
     {
 
