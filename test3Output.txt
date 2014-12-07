@@ -110,13 +110,13 @@ Time :10
 Setting link status to down Link (R0:3 I0:1 W0:1)<-->(R1:4 I1:0 W1:1)
 Time :11
 Time :12
-Forwarded packet src 0 dst 4 type 1 ttl 254 seq 1 path
+Dropping packet src 0 dst 4 type 1 ttl 255 seq 1 path
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
 d 3 i 0 m 1
-d 4 i 0 m 2
+d 4 i 0 m 60
 d 5 i 0 m 2
 d 6 i 0 m 2
 Router 1
@@ -168,11 +168,8 @@ d 4 i 2 m 3
 d 5 i 2 m 1
 d 6 i -1 m 0
 Time :13
-Forwarded packet src 0 dst 4 type 1 ttl 253 seq 1 path (0.0->3.0)
 Time :14
-Forwarded packet src 0 dst 4 type 1 ttl 252 seq 1 path (0.0->3.0) (3.2->6.1)
 Time :15
-Received packet src 0 dst 4 type 1 ttl 252 seq 1 path (0.0->3.0) (3.2->6.1) (6.0->4.1)
 Time :16
 Time :17
 Time :18
@@ -330,23 +327,23 @@ Time :47
 Time :48
 Time :49
 Time :50
-Dropping packet src 0 dst 5 type 1 ttl 255 seq 4 path
+Forwarded packet src 0 dst 5 type 1 ttl 254 seq 4 path
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
-d 3 i 2 m 60
-d 4 i 2 m 60
-d 5 i 2 m 60
-d 6 i 2 m 60
+d 3 i 2 m 8
+d 4 i 2 m 18
+d 5 i 2 m 7
+d 6 i 2 m 8
 Router 1
 d 0 i 0 m 1
 d 1 i -1 m 0
 d 2 i 1 m 1
-d 3 i 1 m 7
-d 4 i 1 m 17
-d 5 i 1 m 6
-d 6 i 1 m 7
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
 Router 2
 d 0 i 0 m 1
 d 1 i 1 m 1
@@ -389,33 +386,34 @@ d 5 i 2 m 1
 d 6 i -1 m 0
 event Event is dumpPacketStats to occur at 50 with all
 Pkt stats for 0 :  s 135 r 130 d 1 f 0
-(R0:0 I0:0) s 36 r 34<-->(R1:3 I1:0) s 34 r 36
+(R0:0 I0:0) s 35 r 34<-->(R1:3 I1:0) s 34 r 35
 (R0:0 I0:1) s 49 r 48<-->(R1:2 I1:0) s 49 r 48
-(R0:0 I0:2) s 49 r 48<-->(R1:1 I1:0) s 49 r 48
+(R0:0 I0:2) s 50 r 48<-->(R1:1 I1:0) s 49 r 48
 Pkt stats for 1 :  s 99 r 96 d 0 f 0
-(R0:0 I0:2) s 49 r 48<-->(R1:1 I1:0) s 49 r 48
+(R0:0 I0:2) s 50 r 48<-->(R1:1 I1:0) s 49 r 48
 (R0:1 I0:1) s 50 r 48<-->(R1:2 I1:1) s 49 r 49
 Pkt stats for 2 :  s 142 r 140 d 0 f 1
 (R0:0 I0:1) s 49 r 48<-->(R1:2 I1:0) s 49 r 48
 (R0:1 I0:1) s 50 r 48<-->(R1:2 I1:1) s 49 r 49
 (R0:2 I0:2) s 45 r 44<-->(R1:5 I1:0) s 44 r 45
-Pkt stats for 3 :  s 141 r 140 d 0 f 2
-(R0:0 I0:0) s 36 r 34<-->(R1:3 I1:0) s 34 r 36
+Pkt stats for 3 :  s 141 r 140 d 0 f 1
+(R0:0 I0:0) s 35 r 34<-->(R1:3 I1:0) s 34 r 35
 (R0:3 I0:1) s 9 r 9<-->(R1:4 I1:0) s 9 r 9
-(R0:3 I0:2) s 51 r 48<-->(R1:6 I1:1) s 49 r 50
+(R0:3 I0:2) s 50 r 48<-->(R1:6 I1:1) s 49 r 49
 (R0:3 I0:3) s 49 r 49<-->(R1:5 I1:1) s 50 r 48
-Pkt stats for 4 :  s 58 r 59 d 0 f 0
+Pkt stats for 4 :  s 58 r 58 d 0 f 0
 (R0:3 I0:1) s 9 r 9<-->(R1:4 I1:0) s 9 r 9
-(R0:4 I0:1) s 49 r 50<-->(R1:6 I1:0) s 51 r 48
+(R0:4 I0:1) s 49 r 49<-->(R1:6 I1:0) s 50 r 48
 Pkt stats for 5 :  s 142 r 140 d 0 f 1
 (R0:2 I0:2) s 45 r 44<-->(R1:5 I1:0) s 44 r 45
 (R0:3 I0:3) s 49 r 49<-->(R1:5 I1:1) s 50 r 48
 (R0:5 I0:2) s 49 r 48<-->(R1:6 I1:2) s 49 r 48
-Pkt stats for 6 :  s 147 r 144 d 0 f 2
-(R0:4 I0:1) s 49 r 50<-->(R1:6 I1:0) s 51 r 48
-(R0:3 I0:2) s 51 r 48<-->(R1:6 I1:1) s 49 r 50
+Pkt stats for 6 :  s 147 r 144 d 0 f 1
+(R0:4 I0:1) s 49 r 49<-->(R1:6 I1:0) s 50 r 48
+(R0:3 I0:2) s 50 r 48<-->(R1:6 I1:1) s 49 r 49
 (R0:5 I0:2) s 49 r 48<-->(R1:6 I1:2) s 49 r 48
 Time :51
+Dropping packet src 0 dst 5 type 1 ttl 254 seq 4 path (0.2->1.0)
 Time :52
 Time :53
 Time :54

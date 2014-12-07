@@ -1,15 +1,39 @@
-Test3:
+Part 1 fixed
+
 After link 3.1 4.0 goes down at time :10, at time :12 there appears to be no poisoning of router 3's table by any of its
-neighbouring routers, however it appears that the network has not yet converged. For instance, router 6's next hop to get to 4 is
-interface 2 (router 5), and router 5's next hop to get to 4 is interface 2 (back to router 6).
-Router 3 has not yet calculated a new route to router 4.:
+neighbouring routers, however it appears that the network has not yet converged as 3 hasn't found a route to 4 yet:
+
+Router 3
+d 0 i 0 m 1
+d 1 i 0 m 2
+d 2 i 0 m 2
+d 3 i -1 m 0
+d 4 i 1 m 60
+d 5 i 3 m 1
+d 6 i 2 m 1
+
+At time :12, it seems router 3's routing table has not yet reached router 0, as router 0 is still advertising a route to
+4 via 3 (even though 3's metric for 4 is infinity):
 
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
 d 3 i 0 m 1
-d 4 i 0 m 60
+d 4 i 0 m 2
+d 5 i 0 m 2
+d 6 i 0 m 2
+
+There are pathologies elsewhere on the network at :12. For instance, router 6's next hop to get to 4 is
+interface 2 (router 5), and router 5's next hop to get to 4 is interface 2 (back to router 6). A packet trying to reach
+4 via router 5 or router 6 will loop:
+
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 0 m 1
+d 4 i 0 m 2
 d 5 i 0 m 2
 d 6 i 0 m 2
 Router 1
@@ -121,8 +145,9 @@ d 5 i 2 m 1
 d 6 i -1 m 0
 
 At :35 link 0.0 3.0 goes down. The following is the state of all routing tables at :40. There are no pathologies, SH/PR seems to have
-worked! Alyssa P. Hacker would be overjoyed.
+worked! Alyssa P. Hacker is very pleased.
 
+Forwarded packet src 1 dst 3 type 1 ttl 254 seq 3 path
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
@@ -181,28 +206,26 @@ d 5 i 2 m 1
 d 6 i -1 m 0
 
 link 2.2 5.0 goes down at :45. The network is now partitioned as {0,1,2} and {3,4,5,6}. At time :50 a packet is sent
-from 0 for destination 5. 0 sends the packet to router 1, as per it's table. At time :51 the packet reaches 1
-and is dropped, as it should be.  For some reason updated routing tables have been lost on their way to 0, as it has
-an erroneous table.
+from 0 for destination 5. It is immediately dropped, as it should be.
 
-The following is the state of all routing tables at :50:
+However, there are pathologies elsewhere. The following is the state of all routing tables at :50:
 
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
-d 3 i 2 m 8
-d 4 i 2 m 18
-d 5 i 2 m 7
-d 6 i 2 m 8
+d 3 i 2 m 60
+d 4 i 2 m 60
+d 5 i 2 m 60
+d 6 i 2 m 60
 Router 1
 d 0 i 0 m 1
 d 1 i -1 m 0
 d 2 i 1 m 1
-d 3 i 1 m 60
-d 4 i 1 m 60
-d 5 i 1 m 60
-d 6 i 1 m 60
+d 3 i 1 m 7
+d 4 i 1 m 17
+d 5 i 1 m 6
+d 6 i 1 m 7
 Router 2
 d 0 i 0 m 1
 d 1 i 1 m 1
@@ -244,5 +267,14 @@ d 4 i 0 m 10
 d 5 i 2 m 1
 d 6 i -1 m 0
 
+Notably, router 1's table indicates it can still reach the partitioned network, though it can't. This suggests that 2's
+ammended routing table (taking into account its downed link to 5) hasn't reached 1.
 
-Test 4:
+A packet is able to reach router 4 at time :15, in spite of the downed link
+between 3 and 4, by taking the following (optimal) path:
+
+    Received packet src 0 dst 4 type 1 ttl 252 seq 1 path (0.0->3.0) (3.2->6.1) (6.0->4.1)
+
+src 0 dst 4
+
+test4 still counts to infinity.

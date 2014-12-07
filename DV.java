@@ -112,12 +112,12 @@ public class DV implements RoutingAlgorithm {
     public void tidyTable()
     {
 
-//        for(int i = 0; i < router.getNumInterfaces(); i++){
-//            if(router.getInterfaceState(i) == false){
-//              //  System.out.format("interface %s is down, router %s %n", i, router.getId());
-//                setInfInterface(i);
-//            }
-//        }
+        for(int i = 0; i < router.getNumInterfaces(); i++){
+            if(router.getInterfaceState(i) == false){
+              //  System.out.format("interface %s is down, router %s %n", i, router.getId());
+                setInfInterface(i);
+            }
+        }
 
 
     }
@@ -139,7 +139,7 @@ public class DV implements RoutingAlgorithm {
             return p;
         }
         else if(!isIfaceUp){
-            setInfInterface(iface);
+         //   setInfInterface(iface);
         }
         //else{
             //System.out.println("called out of lastUpdateSent " + lastUpdateSent + " time " +router.getCurrentTime() + " router " + router.getId());

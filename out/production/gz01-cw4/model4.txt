@@ -1,14 +1,14 @@
 Loading configuration : test4.cfg
 Reading file test4.cfg
 Preverse on
-Created Router 0 has 3 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 1 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 2 has 3 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 3 has 4 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 4 has 3 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 5 has 3 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 6 has 4 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
-Created Router 7 has 2 interfaces and uses class DV update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 0 has 3 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 1 has 2 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 2 has 3 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 3 has 4 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 4 has 3 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 5 has 3 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 6 has 4 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
+Created Router 7 has 2 interfaces and uses class DVsolution update interval 1, split horizon + poison reverse: on expire entries off
 Adding link Link (R0:0 I0:0 W0:1)<-->(R1:3 I1:0 W1:1)
 Adding link Link (R0:0 I0:0 W0:1)<-->(R1:3 I1:0 W1:1)
 Adding link Link (R0:0 I0:1 W0:1)<-->(R1:2 I1:0 W1:1)
