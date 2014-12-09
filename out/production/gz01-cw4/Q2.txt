@@ -1,39 +1,15 @@
-Part 1 fixed
-
+Test3:
 After link 3.1 4.0 goes down at time :10, at time :12 there appears to be no poisoning of router 3's table by any of its
-neighbouring routers, however it appears that the network has not yet converged as 3 hasn't found a route to 4 yet:
-
-Router 3
-d 0 i 0 m 1
-d 1 i 0 m 2
-d 2 i 0 m 2
-d 3 i -1 m 0
-d 4 i 1 m 60
-d 5 i 3 m 1
-d 6 i 2 m 1
-
-At time :12, it seems router 3's routing table has not yet reached router 0, as router 0 is still advertising a route to
-4 via 3 (even though 3's metric for 4 is infinity):
+neighbouring routers, however it appears that the network has not yet converged. For instance, router 6's next hop to get to 4 is
+interface 2 (router 5), and router 5's next hop to get to 4 is interface 2 (back to router 6).
+Router 3 has not yet calculated a new route to router 4.:
 
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
 d 3 i 0 m 1
-d 4 i 0 m 2
-d 5 i 0 m 2
-d 6 i 0 m 2
-
-There are pathologies elsewhere on the network at :12. For instance, router 6's next hop to get to 4 is
-interface 2 (router 5), and router 5's next hop to get to 4 is interface 2 (back to router 6). A packet trying to reach
-4 via router 5 or router 6 will loop:
-
-Router 0
-d 0 i -1 m 0
-d 1 i 2 m 1
-d 2 i 1 m 1
-d 3 i 0 m 1
-d 4 i 0 m 2
+d 4 i 0 m 60
 d 5 i 0 m 2
 d 6 i 0 m 2
 Router 1
@@ -145,9 +121,8 @@ d 5 i 2 m 1
 d 6 i -1 m 0
 
 At :35 link 0.0 3.0 goes down. The following is the state of all routing tables at :40. There are no pathologies, SH/PR seems to have
-worked! Alyssa P. Hacker is very pleased.
+worked! Alyssa P. Hacker would be overjoyed.
 
-Forwarded packet src 1 dst 3 type 1 ttl 254 seq 3 path
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
@@ -206,26 +181,28 @@ d 5 i 2 m 1
 d 6 i -1 m 0
 
 link 2.2 5.0 goes down at :45. The network is now partitioned as {0,1,2} and {3,4,5,6}. At time :50 a packet is sent
-from 0 for destination 5. It is immediately dropped, as it should be.
+from 0 for destination 5. 0 sends the packet to router 1, as per it's table. At time :51 the packet reaches 1
+and is dropped, as it should be.  For some reason updated routing tables have been lost on their way to 0, as it has
+an erroneous table.
 
-However, there are pathologies elsewhere. The following is the state of all routing tables at :50:
+The following is the state of all routing tables at :50:
 
 Router 0
 d 0 i -1 m 0
 d 1 i 2 m 1
 d 2 i 1 m 1
-d 3 i 2 m 60
-d 4 i 2 m 60
-d 5 i 2 m 60
-d 6 i 2 m 60
+d 3 i 2 m 8
+d 4 i 2 m 18
+d 5 i 2 m 7
+d 6 i 2 m 8
 Router 1
 d 0 i 0 m 1
 d 1 i -1 m 0
 d 2 i 1 m 1
-d 3 i 1 m 7
-d 4 i 1 m 17
-d 5 i 1 m 6
-d 6 i 1 m 7
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
 Router 2
 d 0 i 0 m 1
 d 1 i 1 m 1
@@ -267,14 +244,274 @@ d 4 i 0 m 10
 d 5 i 2 m 1
 d 6 i -1 m 0
 
-Notably, router 1's table indicates it can still reach the partitioned network, though it can't. This suggests that 2's
-ammended routing table (taking into account its downed link to 5) hasn't reached 1.
 
-A packet is able to reach router 4 at time :15, in spite of the downed link
-between 3 and 4, by taking the following (optimal) path:
+Test 4:
 
-    Received packet src 0 dst 4 type 1 ttl 252 seq 1 path (0.0->3.0) (3.2->6.1) (6.0->4.1)
+At :15 link 2.2 5.0 goes down. By :20 the routing tables have converged, and no pathologies are apparent. The following
+is the state of the routing tables at :20
 
-src 0 dst 4
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 0 m 1
+d 4 i 0 m 2
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 0 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 2
+d 4 i 0 m 3
+d 5 i 0 m 3
+d 6 i 0 m 3
+d 7 i 0 m 4
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 0 m 2
+d 4 i 0 m 3
+d 5 i 0 m 3
+d 6 i 0 m 3
+d 7 i 0 m 4
+Router 3
+d 0 i 0 m 1
+d 1 i 0 m 2
+d 2 i 0 m 2
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 0 m 2
+d 1 i 0 m 3
+d 2 i 0 m 3
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 1 m 2
+d 1 i 1 m 3
+d 2 i 1 m 3
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 1 m 2
+d 1 i 1 m 3
+d 2 i 1 m 3
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 0 m 4
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
 
-test4 still counts to infinity.
+At :30 link 0.0 and 3.0 goes down. The network is now partitioned, and susceptible to certain pathologies, which even
+SH/PR can't address.
+
+Below is the routing state at :32. There are pathologies in both partitions of the network. Routers 1 and 2 still think
+they can reach the partitioned network. If 1 or 2 advertise a routing table to 0, before 0 can advertise its own table,
+than the pathology will take hold, and will only be resolved by counting to infinity.
+
+Time :32
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 0 m 60
+d 4 i 0 m 60
+d 5 i 0 m 60
+d 6 i 0 m 60
+d 7 i 0 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 3
+d 4 i 1 m 4
+d 5 i 1 m 4
+d 6 i 1 m 4
+d 7 i 1 m 5
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 3
+d 4 i 1 m 4
+d 5 i 1 m 4
+d 6 i 1 m 4
+d 7 i 1 m 5
+Router 3
+d 0 i 0 m 60
+d 1 i 0 m 60
+d 2 i 0 m 60
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 1 m 12
+d 1 i 1 m 13
+d 2 i 1 m 13
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 2 m 3
+d 1 i 2 m 4
+d 2 i 2 m 4
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 2 m 3
+d 1 i 2 m 4
+d 2 i 2 m 4
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 0 m 4
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
+
+At :34 it appears 0's table has reached 2, but not 1. The metrics for the erroneous table have risen by 2. Suggesting
+that between 32 to 33 the table was passed to 0 and adopted my 0 (increasing the metric by 0) and then passed back to 1,
+increasing the metrics again by 1.
+
+The same pathology is exhibited in partition {7,4,6,5,3}. It cannot be resolved by SH/PR. It will be resolved by
+counting to infinity.
+
+Time :34
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 5
+d 4 i 0 m 6
+d 5 i 0 m 6
+d 6 i 0 m 6
+d 7 i 0 m 7
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+
+
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 11
+d 4 i 0 m 12
+d 5 i 0 m 12
+d 6 i 0 m 12
+d 7 i 0 m 13
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 3
+d 0 i 2 m 11
+d 1 i 2 m 12
+d 2 i 2 m 12
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 1 m 20
+d 1 i 1 m 21
+d 2 i 1 m 21
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 1 m 60
+d 1 i 1 m 60
+d 2 i 1 m 60
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 2 m 11
+d 1 i 2 m 12
+d 2 i 2 m 12
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 11
+d 1 i 0 m 12
+d 2 i 0 m 12
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
+
+Convergence is reached at Time :99.

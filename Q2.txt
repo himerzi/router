@@ -246,3 +246,272 @@ d 6 i -1 m 0
 
 
 Test 4:
+
+At :15 link 2.2 5.0 goes down. By :20 the routing tables have converged, and no pathologies are apparent. The following
+is the state of the routing tables at :20
+
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 0 m 1
+d 4 i 0 m 2
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 0 m 3
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 2
+d 4 i 0 m 3
+d 5 i 0 m 3
+d 6 i 0 m 3
+d 7 i 0 m 4
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 0 m 2
+d 4 i 0 m 3
+d 5 i 0 m 3
+d 6 i 0 m 3
+d 7 i 0 m 4
+Router 3
+d 0 i 0 m 1
+d 1 i 0 m 2
+d 2 i 0 m 2
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 0 m 2
+d 1 i 0 m 3
+d 2 i 0 m 3
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 1 m 2
+d 1 i 1 m 3
+d 2 i 1 m 3
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 1 m 2
+d 1 i 1 m 3
+d 2 i 1 m 3
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 0 m 4
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
+
+At :30 link 0.0 and 3.0 goes down. The network is now partitioned, and susceptible to certain pathologies, which even
+SH/PR can't address.
+
+Below is the routing state at :32. There are pathologies in both partitions of the network. Routers 1 and 2 still think
+they can reach the partitioned network. If 1 or 2 advertise a routing table to 0, before 0 can advertise its own table,
+than the pathology will take hold, and will only be resolved by counting to infinity.
+
+Time :32
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 0 m 60
+d 4 i 0 m 60
+d 5 i 0 m 60
+d 6 i 0 m 60
+d 7 i 0 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 1 m 3
+d 4 i 1 m 4
+d 5 i 1 m 4
+d 6 i 1 m 4
+d 7 i 1 m 5
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 3
+d 4 i 1 m 4
+d 5 i 1 m 4
+d 6 i 1 m 4
+d 7 i 1 m 5
+Router 3
+d 0 i 0 m 60
+d 1 i 0 m 60
+d 2 i 0 m 60
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 1 m 12
+d 1 i 1 m 13
+d 2 i 1 m 13
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 2 m 3
+d 1 i 2 m 4
+d 2 i 2 m 4
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 2 m 3
+d 1 i 2 m 4
+d 2 i 2 m 4
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 3
+d 1 i 0 m 4
+d 2 i 0 m 4
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
+
+At :34 it appears 0's table has reached 2, but not 1. The metrics for the erroneous table have risen by 2. Suggesting
+that between 32 to 33 the table was passed to 0 and adopted my 0 (increasing the metric by 0) and then passed back to 1,
+increasing the metrics again by 1.
+
+The same pathology is exhibited in partition {7,4,6,5,3}. It cannot be resolved by SH/PR. It will be resolved by
+counting to infinity.
+
+Time :34
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 5
+d 4 i 0 m 6
+d 5 i 0 m 6
+d 6 i 0 m 6
+d 7 i 0 m 7
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+
+
+Router 0
+d 0 i -1 m 0
+d 1 i 2 m 1
+d 2 i 1 m 1
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 1
+d 0 i 0 m 1
+d 1 i -1 m 0
+d 2 i 1 m 1
+d 3 i 0 m 11
+d 4 i 0 m 12
+d 5 i 0 m 12
+d 6 i 0 m 12
+d 7 i 0 m 13
+Router 2
+d 0 i 0 m 1
+d 1 i 1 m 1
+d 2 i -1 m 0
+d 3 i 1 m 60
+d 4 i 1 m 60
+d 5 i 1 m 60
+d 6 i 1 m 60
+d 7 i 1 m 60
+Router 3
+d 0 i 2 m 11
+d 1 i 2 m 12
+d 2 i 2 m 12
+d 3 i -1 m 0
+d 4 i 1 m 1
+d 5 i 3 m 1
+d 6 i 2 m 1
+d 7 i 1 m 2
+Router 4
+d 0 i 1 m 20
+d 1 i 1 m 21
+d 2 i 1 m 21
+d 3 i 0 m 1
+d 4 i -1 m 0
+d 5 i 0 m 2
+d 6 i 0 m 2
+d 7 i 2 m 1
+Router 5
+d 0 i 1 m 60
+d 1 i 1 m 60
+d 2 i 1 m 60
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i -1 m 0
+d 6 i 2 m 1
+d 7 i 2 m 2
+Router 6
+d 0 i 2 m 11
+d 1 i 2 m 12
+d 2 i 2 m 12
+d 3 i 1 m 1
+d 4 i 1 m 2
+d 5 i 2 m 1
+d 6 i -1 m 0
+d 7 i 3 m 1
+Router 7
+d 0 i 0 m 11
+d 1 i 0 m 12
+d 2 i 0 m 12
+d 3 i 0 m 2
+d 4 i 0 m 1
+d 5 i 1 m 2
+d 6 i 1 m 1
+d 7 i -1 m 0
+
+Convergence is reached at Time :99.

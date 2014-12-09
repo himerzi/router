@@ -38,6 +38,11 @@ public class DV implements RoutingAlgorithm {
     static int LOCAL = -1;
     static int UNKNOWN = -2;
     static int INFINITY = 60;
+//    expire in garbage collection time, which is 4 update intervals, ie current time - 6 *update interval
+    static int EXPIREGC;
+
+//    set to timout timer, ie current time - 10*ui
+//    static int EXPIRETO;
 
 
     private HashMap<Integer, DVRoutingTableEntry> routingTable = new HashMap<Integer, DVRoutingTableEntry>();
@@ -49,7 +54,7 @@ public class DV implements RoutingAlgorithm {
     //Is split horizon enabled?
     private boolean PR = true;
 //    Is poison reverse enabled?
-    private boolean expire = false;
+    private boolean expire = true;
     //keepstrack of when the last update was sent, for each interface. ie lastUpdateSent[0] is when the last routing table
     // update was generated, and sent on interface 0
     private int[] lastUpdateSent;
@@ -93,6 +98,7 @@ public class DV implements RoutingAlgorithm {
         // int arrays are automatically initialised to 0 in java.
         heardFrom = new boolean[router.getNumInterfaces()];
         lastUpdateSent = new int[router.getNumInterfaces()];
+        EXPIREGC = 6*updateInterval;
 
     }
 
@@ -118,6 +124,13 @@ public class DV implements RoutingAlgorithm {
                 setInfInterface(i);
             }
         }
+//        RFC specifies an entry is deleted (given update interval = 30) every 180+120=300 seconds.
+//        So, every 10 update intervals.
+        if(expire){
+            garbageCollect();
+        }
+
+
 
 
     }
@@ -138,10 +151,7 @@ public class DV implements RoutingAlgorithm {
             lastUpdateSent[iface] = time;
             return p;
         }
-        else if(!isIfaceUp){
-         //   setInfInterface(iface);
-        }
-        //else{
+
             //System.out.println("called out of lastUpdateSent " + lastUpdateSent + " time " +router.getCurrentTime() + " router " + router.getId());
             return null;
         //}
@@ -181,6 +191,25 @@ public class DV implements RoutingAlgorithm {
         timeCount++;
     }
 
+    private void garbageCollect()
+    {
+
+        int time = router.getCurrentTime();
+        int gc = 10*updateInterval;
+        int timeout = 6 *updateInterval;
+        int thisRouter = router.getId();
+        for ( Iterator<Map.Entry<Integer, DVRoutingTableEntry>> it = routingTable.entrySet().iterator(); it.hasNext();){
+            DVRoutingTableEntry entry = it.next().getValue();
+            if(entry.getDestination() == thisRouter) continue;
+            if(entry.getTime() + timeout <= time){
+                entry.setMetric(INFINITY);
+            }
+            if(entry.getTime() + gc <= time)
+                it.remove();
+        }
+
+
+    }
     /**
      * set all entries in the routing table for a particular interface to infinity. Called if we suspect the link for
      * that interface to be down
@@ -189,8 +218,9 @@ public class DV implements RoutingAlgorithm {
     private void setInfInterface(int iface){
         //System.out.println("seting iface inf  "  + iface + " router " + router.getId());
         for(DVRoutingTableEntry entry : routingTable.values()){
-            if(entry.getInterface() == iface){
+            if(entry.getInterface() == iface && entry.getMetric() < INFINITY){
                 entry.setMetric(INFINITY);
+                entry.setTime(router.getCurrentTime() - EXPIREGC);
                 routingTable.put(entry.getDestination(), entry);
             }
 
@@ -251,6 +281,7 @@ public class DV implements RoutingAlgorithm {
     {
 
         int key = externalEntry.getDestination();
+        int time = router.getCurrentTime();
 //      r = lookup(D) in routing table
         DVRoutingTableEntry myEntry = routingTable.get(key);
 
@@ -259,71 +290,40 @@ public class DV implements RoutingAlgorithm {
 
 //      if (r = “not found”) then
         if(myEntry == null){
-//          newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
+            if(newMetric >= INFINITY){
+                return;
+            }
 //           TODO IMpelment TTL
-            myEntry = new DVRoutingTableEntry(key, iface, newMetric,1);
+            myEntry = new DVRoutingTableEntry(key, iface, newMetric, time);
         }
 //      else if (i == r.i) then r.m = m
         else if(iface == myEntry.getInterface()){
 //           the metric should be updated
+
+            //set the GC timer ONLY if the metric wasn't allready infinity;
+            if(myEntry.getMetric() < INFINITY && newMetric == INFINITY){
+                //Deletions can occur if
+                //the metric is set to 16 because of an update received from the
+                //current router The garbage-collection timer is set for 120 seconds.
+                //set the time to be (10*uinterval)-(4*uinterval ago)
+//                int sub =  (6 *updateInterval);
+                myEntry.setTime(time - EXPIREGC);
+            }
+            else if(myEntry.getMetric() < INFINITY){
+                myEntry.setTime(time);
+            }
             myEntry.setMetric(newMetric);
+
         }
 //      else if (m < r.m) then r.m = m; r.i = i
         else if(myEntry.getMetric() > newMetric){
             myEntry.setMetric(newMetric);
             myEntry.setInterface(iface);
+            myEntry.setTime(time);
+        }
+        else if(myEntry.getMetric() == newMetric && myEntry.getInterface() == iface  && newMetric < INFINITY){
+            myEntry.setTime(time);
         }
         routingTable.put(key, myEntry);
     }
 }
-
-//class DVRoutingTable<Integer, DVRoutingTableEntry> extends HashMap<Integer, DVRoutingTableEntry>
-//{
-//    /**
-//     * Iface is the interface that the routing packed came in on, metric is the metric for that interface
-//     * @param externalTable
-//     * @param iface
-//     */
-//    public void DVTableMerge(DVRoutingTable<Integer, DVRoutingTableEntry> externalTable, int iface, int metric)
-//    {
-//        Iterator iter = externalTable.entrySet().iterator();
-//        while (iter.hasNext()){
-//            Map.Entry extEntry = (Map.Entry)iter.next();
-//            compareAndModifyEntries((Integer)extEntry.getKey(), (DVRoutingTableEntry)extEntry.getValue(), iface, metric);
-//        }
-////            for (Map.Entry<Object,Object> extEntry : ) {
-////                compareAndModifyEntries((Integer)extEntry.getKey(), (DVRoutingTableEntry)extEntry.getValue(), iface, metric);
-////            }
-//    }
-//
-//    public void compareAndModifyEntries(Integer key, DVRoutingTableEntry externalEntry, int iface, int metric)
-//    {
-//        //r = lookup(D) in routing table
-//        DVRoutingTableEntry myEntry = get(key);
-//
-//        int newMetric = externalEntry.getMetric() + metric;
-//        //if (r = “not found”) then
-//        if(myEntry == null){
-//            //            newr = new routing table entry newr.D = D; newr.m = m; newr.i = i add newr to table
-
-//            myEntry = new DVRoutingTableEntry(externalEntry.getDestination(), iface, newMetric,
-//                    0);
-//        }
-//        //        else if (i == r.i) then r.m = m
-//        else if(iface == myEntry.getInterface()){
-//            myEntry.setMetric(newMetric);
-//        }
-//        //        else if (m < r.m) then r.m = m; r.i = i
-//        else if(myEntry.getMetric() > newMetric){
-//            myEntry.setMetric(newMetric);
-//            myEntry.setInterface(iface);
-//        }
-//        put(key, myEntry);
-//    }
-//}
-
-
-
-
-
-
